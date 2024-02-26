@@ -15,7 +15,7 @@ def convert_timestamp_to_iso_date(timestamp):
     return toiso(date)
 
 @browser(
-    parallel= 5,
+    parallel= 10,
     block_images=True,
     keep_drivers_alive=True,
     reuse_driver=True,
