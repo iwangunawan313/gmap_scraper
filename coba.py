@@ -16,10 +16,9 @@ def convert_timestamp_to_iso_date(timestamp):
 
 @browser(
     parallel=bt.calc_max_parallel_browsers,
-    wait=4,
     block_images=True,
     keep_drivers_alive=True,
-    reuse_driver=True,
+    #reuse_driver=True,
     close_on_crash=True,
     headless=True,
     output=None
