@@ -1,10 +1,9 @@
 from botasaurus import *
-from botasaurus import bt
 import urllib.parse
 
 @browser(
     block_images=True,
-    parallel=bt.calc_max_parallel_browsers,
+    #parallel=bt.calc_max_parallel_browsers,
     reuse_driver=True,
 )
 def scrape_places(driver: AntiDetectDriver, link):
