@@ -15,10 +15,10 @@ def convert_timestamp_to_iso_date(timestamp):
     return toiso(date)
 
 @browser(
-    parallel=bt.calc_max_parallel_browsers,
+    parallel= 5,
     block_images=True,
     keep_drivers_alive=True,
-    #reuse_driver=True,
+    reuse_driver=True,
     close_on_crash=True,
     headless=True,
     output=None
@@ -72,7 +72,7 @@ def scrape_places(driver: AntiDetectDriver, link):
 
 
 @browser(
-    data=["toko bangunan in bandung"],
+    data=["ruko in bandung"],
     block_images=True,
     close_on_crash=True,
     headless=True,
