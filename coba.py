@@ -1,11 +1,30 @@
 from botasaurus import *
+from botasaurus import bt
 import urllib.parse
+from datetime import datetime
+
+def toiso(date):
+    return date.isoformat() 
+
+def convert_timestamp_to_iso_date(timestamp):
+    # Convert from microseconds to milliseconds
+    milliseconds = int(timestamp) / 1000
+    # Create a new Date object
+    date = datetime.utcfromtimestamp(milliseconds)
+    # Return the date in the specified format
+    return toiso(date)
 
 @browser(
+    parallel=bt.calc_max_parallel_browsers,
+    wait=4,
     block_images=True,
-    #parallel=bt.calc_max_parallel_browsers,
+    keep_drivers_alive=True,
     reuse_driver=True,
+    close_on_crash=True,
+    headless=True,
+    output=None
 )
+
 def scrape_places(driver: AntiDetectDriver, link):
 
     # Visit an individual place and extract data
@@ -23,18 +42,18 @@ def scrape_places(driver: AntiDetectDriver, link):
         title = driver.text(title_selector)
 
         # Extract rating
-        rating_selector = "div.F7nice > span"
-        rating = driver.text(rating_selector)
+        #rating_selector = "div.F7nice > span"
+        #rating = driver.text(rating_selector)
 
         # Extract reviews count
-        reviews_selector = "div.F7nice > span:last-child"
-        reviews_text = driver.text(reviews_selector)
-        reviews = int(''.join(filter(str.isdigit, reviews_text))
-                      ) if reviews_text else None
+        #reviews_selector = "div.F7nice > span:last-child"
+        #reviews_text = driver.text(reviews_selector)
+        #reviews = int(''.join(filter(str.isdigit, reviews_text))
+        #              ) if reviews_text else None
 
         # Extract website link
-        website_selector = "a[data-item-id='authority']"
-        website = driver.link(website_selector)
+        #website_selector = "a[data-item-id='authority']"
+        #website = driver.link(website_selector)
 
         # Extract phone number
         phone_xpath = "//button[starts-with(@data-item-id,'phone')]"
@@ -45,17 +64,20 @@ def scrape_places(driver: AntiDetectDriver, link):
         return {
             "title": title,
             "phone": phone,
-            "website": website,
-            "reviews": reviews,
-            "rating": rating,
-            "link": link,
+            #"website": website,
+            #"reviews": reviews,
+            #"rating": rating,
+            #"link": link,
         }
     return scrape_place_data()
 
 
 @browser(
-    data=["hijab in bandung"],
+    data=["toko bangunan in bandung"],
     block_images=True,
+    close_on_crash=True,
+    headless=True,
+    output=None
 )
 def scrape_places_links(driver: AntiDetectDriver, query):
 
