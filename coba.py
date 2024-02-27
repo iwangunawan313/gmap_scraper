@@ -40,20 +40,6 @@ def scrape_places(driver: AntiDetectDriver, link):
         title_selector = 'h1'
         title = driver.text(title_selector)
 
-        # Extract rating
-        #rating_selector = "div.F7nice > span"
-        #rating = driver.text(rating_selector)
-
-        # Extract reviews count
-        #reviews_selector = "div.F7nice > span:last-child"
-        #reviews_text = driver.text(reviews_selector)
-        #reviews = int(''.join(filter(str.isdigit, reviews_text))
-        #              ) if reviews_text else None
-
-        # Extract website link
-        #website_selector = "a[data-item-id='authority']"
-        #website = driver.link(website_selector)
-
         # Extract phone number
         phone_xpath = "//button[starts-with(@data-item-id,'phone')]"
         phone_element = driver.get_element_or_none(phone_xpath)
@@ -63,10 +49,6 @@ def scrape_places(driver: AntiDetectDriver, link):
         return {
             "title": title,
             "phone": phone,
-            #"website": website,
-            #"reviews": reviews,
-            #"rating": rating,
-            #"link": link,
         }
     return scrape_place_data()
 
