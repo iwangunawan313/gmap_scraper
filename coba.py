@@ -2,6 +2,7 @@ from botasaurus import *
 from botasaurus import bt
 import urllib.parse
 from datetime import datetime
+import pandas as pd
 
 def toiso(date):
     return date.isoformat() 
@@ -110,5 +111,13 @@ hasil = scrape_places(link)
 scrape_places.close()
 
 # Write the data to the file "data.csv"
-bt.write_json(hasil, "hasil_scrape.json")
-bt.write_csv(hasil, "hasil_scrape.csv")
+#bt.write_csv(hasil, "hasil_scrape.csv")
+#bt.write_json(hasil, "hasil_scrape.json")
+
+# Membuat DataFrame
+df = pd.DataFrame(hasil)
+
+# Menyimpan DataFrame ke Excel
+excel_writer = pd.ExcelWriter('output/hasil_scrape.xlsx')
+df.to_excel(excel_writer, sheet_name='Sheet1', index=False)
+excel_writer._save()
