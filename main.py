@@ -1,8 +1,6 @@
 from botasaurus import *
 from botasaurus import bt
 import urllib.parse
-from datetime import datetime
-import pandas as pd
 
 @browser(
     block_images=True,
