@@ -53,9 +53,10 @@ def scrape_places(driver: AntiDetectDriver, link):
         }
     return scrape_place_data()
 
+keyword = ["hotel di semarang"]
 
 @browser(
-    data=["ruko in bandung"],
+    data=keyword,
     block_images=True,
     close_on_crash=True,
     headless=True,
@@ -118,6 +119,11 @@ scrape_places.close()
 df = pd.DataFrame(hasil)
 
 # Menyimpan DataFrame ke Excel
-excel_writer = pd.ExcelWriter('output/hasil_scrape.xlsx')
+#excel_writer = pd.ExcelWriter('output/hasil_scrape.xlsx')
+
+# Membuat nama file Excel sesuai dengan keyword
+nama_file = keyword[0]
+excel_writer = pd.ExcelWriter(f"output/{nama_file}.xlsx")
+
 df.to_excel(excel_writer, sheet_name='Sheet1', index=False)
 excel_writer._save()
